@@ -1,0 +1,51 @@
+---
+title: "STA 160 Final Project"
+author: "Derek Wong"
+date: "5/23/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(covid19.analytics)
+```
+
+
+```{r}
+#obtain data
+cases<- covid19.data()
+View(cases)
+
+```
+
+```{r}
+confirmed_cases <- covid19.data(case="ts-confirmed")
+View(confirmed_cases)
+
+death_count <- covid19.data(case = "ts-deaths")
+View(death_count)
+```
+
+```{r}
+report.summary(Nentries = 7,
+               graphical.output = T)
+```
+
+```{r}
+total_ts <- covid19.data(case = "ts-ALL")
+totals.plt(total_ts)
+tots.per.location(confirmed_cases,geo.loc = "US" )
+growth.rate(confirmed_cases, geo.loc = "US")
+generate.SIR.model(confirmed_cases,'US', tot.population=328200000)
+
+```
+
+
+### Code Appendix
+```{r, ref.label=knitr::all_labels(),echo=TRUE,eval=FALSE}
+```
